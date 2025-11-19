@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel AI Editor</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+    
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="ph-fill ph-book-open-text"></i> Novel AI Editor
+        </div>
+
+        <div>
+            <div class="section-label">Project Context</div>
+            <div class="file-upload-wrapper">
+                <label for="fileUpload" class="upload-btn">
+                    <i class="ph ph-upload-simple"></i> 원고 업로드 (.txt)
+                </label>
+                <input type="file" id="fileUpload" class="hidden" accept=".txt">
+                <div id="fileInfo" class="file-status">
+                    <i class="ph-fill ph-check-circle"></i>
+                    <span id="fileNameText">파일 없음</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="section-label">Analysis Tools</div>
+            <div class="action-list">
+                <button id="btnConsistency" class="action-btn" onclick="requestAnalysis('consistency')" disabled>
+                    <i class="ph ph-users-three"></i>
+                    <div>
+                        <div>설정 오류 분석</div>
+                        <div style="font-size: 11px; color: var(--text-sub); font-weight: 400;">캐릭터/세계관 불일치 탐지</div>
+                    </div>
+                </button>
+                <button id="btnStructure" class="action-btn" onclick="requestAnalysis('structure')" disabled>
+                    <i class="ph ph-kanban"></i>
+                    <div>
+                        <div>챕터 구조 분석</div>
+                        <div style="font-size: 11px; color: var(--text-sub); font-weight: 400;">플롯 개연성 및 흐름 점검</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <div class="chat-container" id="chatWindow">
+            <div class="chat-message ai-message">
+                <div class="avatar ai-avatar"><i class="ph-fill ph-sparkle"></i></div>
+                <div class="message-content">
+                    <p><strong>반갑습니다, 작가님!</strong></p>
+                    <p>좌측 사이드바에서 원고 파일(.txt)을 업로드하면 분석을 시작할 수 있습니다.<br>
+                    원고에 대해 궁금한 점이 있다면 언제든 물어봐 주세요.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="chatLoader" class="loader-overlay">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="input-area-wrapper">
+            <div class="input-box">
+                <input type="text" id="userInput" placeholder="AI 편집자에게 질문하기 (예: 3챕터의 긴장감이 부족한가요?)" onkeydown="handleKeydown(event)">
+                <button id="btnSend" class="send-btn" onclick="sendMessage()" disabled>
+                    <i class="ph-bold ph-paper-plane-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <aside class="right-panel" id="analysisPanelContainer">
+        <div class="panel-header">
+            <div class="panel-title" id="analysisTitle">
+                <i class="ph ph-chart-bar"></i> 분석 리포트
+            </div>
+            <button class="close-panel-btn" onclick="closeAnalysisPanel()">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        
+        <div id="analysisLoader" class="loader-overlay">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="panel-content" id="analysisResult">
+            <p style="color: var(--text-sub); text-align: center; margin-top: 50px;">
+                좌측 메뉴에서 분석을 실행하면<br>여기에 결과가 표시됩니다.
+            </p>
+        </div>
+    </aside>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

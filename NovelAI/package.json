@@ -1,0 +1,35 @@
+{
+  "name": "novel_ai_editor",
+  "version": "1.0.0",
+  "description": "AI Novel Editor with Python Backend",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsj0939/Novel_AI_Editor.git"
+  },
+  "author": "Hwang Seojin",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "build": {
+    "appId": "com.hsj0939.novelai",
+    "productName": "Novel AI Editor",
+    "asar": false,
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "files": [
+      "**/*"
+    ]
+  }
+}
